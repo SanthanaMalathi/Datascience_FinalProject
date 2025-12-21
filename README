@@ -1,0 +1,108 @@
+💳 Credit Card Fraud Detection using Machine Learning
+
+📌 Project Overview
+    Credit card fraud is a major challenge for financial institutions due to the highly imbalanced
+    nature of transaction data.This project focuses on building an end-to-end machine learning
+    pipeline to detect fraudulent credit card transactions using multiple classification
+    algorithms and advanced evaluation techniques.
+
+    The project includes:
+        1.Exploratory Data Analysis (EDA)
+        2.Data preprocessing and feature scaling
+        3.ANOVA-based feature selection
+        4.Handling class imbalance using SMOTE
+        5.Model training and comparison
+        6.Hyperparameter tuning
+        7.Model evaluation using fraud-appropriate metrics
+        8.Final model selection and deployment readiness using Pickle and Flask
+
+🎯 Objective
+    To accurately identify fraudulent transactions while maintaining a balance between:
+        1. High Recall (catching frauds)
+        2. High Precision (reducing false alarms)
+
+📂 Dataset Description
+    1.Source: Credit Card Transactions Dataset from kaggle
+    2.Target Variable: Class
+        0 → Non-Fraud
+        1 → Fraud
+    3.Key Characteristics:
+        Highly imbalanced dataset
+        Numerical features
+        Includes Amount and Time attributes
+
+🛠️ Technologies & Libraries Used
+    1. Programming Language: Python
+
+    2.Libraries:
+         pandas, numpy
+         matplotlib,seaborn
+         scikit-learn
+         imbalanced-learn (SMOTE)
+         xgboost
+         pickle
+         Flask (for deployment)
+
+🔄 Project Workflow
+1️⃣ Data Exploration & Analysis
+    Checked dataset structure, data types, and missing values
+    Analyzed class imbalance
+    Visualized:
+        Class distribution
+        Transaction amount distribution
+        Fraud vs non-fraud transactions
+        Correlation heatmap
+2️⃣ Data Preprocessing
+    Removed duplicate records
+    Scaled Amount and Time using StandardScaler
+    Dropped original unscaled columns
+    Split data into training and testing sets using stratified sampling
+3️⃣ Feature Selection using ANOVA (f_classif)
+    ANOVA evaluates how strongly each feature is related to the target
+    Outputs:
+    F-score → Feature importance
+    P-value → Statistical significance
+    Top features are selected using SelectKBest
+4️⃣Handling Class Imbalance
+    Applied SMOTE (Synthetic Minority Oversampling Technique) on training data
+    Improved model learning for minority (fraud) class
+5️⃣ Model Training
+Trained and evaluated the following models:
+    Logistic Regression
+    Random Forest Classifier
+    XGBoost Classifier
+    Gradient Boosting classifier
+6️⃣ Model Evaluation Metrics
+Due to class imbalance, accuracy was avoided.
+Instead, the following metrics were used:
+    Precision
+    Recall
+    ROC-AUC
+    PR-AUC
+    Confusion Matrix
+    Precision-Recall Curve
+    ROC Curve
+7️⃣ Hyperparameter Tuning
+    Applied RandomizedSearchCV
+    Optimized models using F1-Score
+    Tuned parameters for:
+        Random Forest
+        XGBoost
+8️⃣ Final Model Selection
+The Tuned Random Forest Classifier was selected as the final model because:
+    Higher precision (fewer false positives)
+    Strong recall
+    Better balance for real-world fraud detection systems
+
+💾 Model Serialization (Pickle)
+To enable deployment:
+    The trained model  were serialized using pickle
+    Ensures consistent preprocessing and prediction during inference
+        model_filename = "credit_card_fraud_random_forest.pkl"
+        joblib.dump(best_model, model_filename)
+🌐 Deployment (Flask)
+    A Flask web application loads the pickled model
+    Accepts transaction inputs
+    Outputs:
+        Fraud / Non-Fraud prediction
+        Probability score
